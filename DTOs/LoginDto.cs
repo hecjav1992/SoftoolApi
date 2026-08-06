@@ -1,0 +1,1 @@
+namespace EasyData.Api.DTOs; public record LoginDto(string Usuario,string Password);
