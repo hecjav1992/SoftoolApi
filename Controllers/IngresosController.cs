@@ -1,2 +1,52 @@
-using EasyData.Api.Data;using EasyData.Api.DTOs;using EasyData.Api.Models;using Microsoft.AspNetCore.Authorization;using Microsoft.AspNetCore.Mvc;using Microsoft.EntityFrameworkCore;namespace EasyData.Api.Controllers;[Authorize][ApiController][Route("api/ingresos")]public class IngresosController(AppDbContext db):ControllerBase{[HttpGet]public async Task<IActionResult> Get()=>Ok(await db.IngresosEquipos.OrderByDescending(x=>x.Id).ToListAsync());[HttpGet("buscar/{numeroIngreso}")]public async Task<IActionResult> Buscar(string numeroIngreso){var x=await db.IngresosEquipos.AsNoTracking().FirstOrDefaultAsync(e=>e.NumeroIngreso==numeroIngreso.Trim());return x is null?NotFound(new{message="No existe un equipo registrado con ese número de ingreso."}):Ok(x);}
-[HttpPost]public async Task<IActionResult> Post(CrearIngresoDto d){if(await db.IngresosEquipos.AnyAsync(x=>x.NumeroIngreso==d.NumeroIngreso))return Conflict("Número de ingreso duplicado");var x=new IngresoEquipo{NumeroIngreso=d.NumeroIngreso,FechaIngreso=d.FechaIngreso,Cliente=d.Cliente,Telefono=d.Telefono,Correo=d.Correo,TipoEquipo=d.TipoEquipo,Marca=d.Marca,Modelo=d.Modelo,ImeiSerie=d.ImeiSerie,Accesorios=d.Accesorios,EstadoFisico=d.EstadoFisico,FallaReportada=d.FallaReportada,Observaciones=d.Observaciones};db.Add(x);await db.SaveChangesAsync();return Ok(x);}}
+using EasyData.Api.Data;
+using EasyData.Api.DTOs;
+using EasyData.Api.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace EasyData.Api.Controllers;
+
+[Authorize]
+[ApiController]
+[Route("api/ingresos")]
+public class IngresosController(AppDbContext db) : ControllerBase
+{
+    [HttpGet]
+    public async Task<IActionResult> Get() => Ok(await db.IngresosEquipos.OrderByDescending(x => x.Id).ToListAsync());
+
+    [HttpGet("buscar/{numeroIngreso}")]
+    public async Task<IActionResult> Buscar(string numeroIngreso)
+    {
+        var x = await db.IngresosEquipos.AsNoTracking().FirstOrDefaultAsync(e => e.NumeroIngreso == numeroIngreso.Trim());
+        return x is null ? NotFound(new { message = "No existe un equipo registrado con ese número de ingreso." }) : Ok(x);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post(CrearIngresoDto d)
+    {
+        if (await db.IngresosEquipos.AnyAsync(x => x.NumeroIngreso == d.NumeroIngreso))
+            return Conflict("Número de ingreso duplicado");
+
+        var x = new IngresoEquipo
+        {
+            NumeroIngreso = d.NumeroIngreso,
+            FechaIngreso = d.FechaIngreso,
+            Cliente = d.Cliente,
+            Telefono = d.Telefono,
+            Correo = d.Correo,
+            TipoEquipo = d.TipoEquipo,
+            Marca = d.Marca,
+            Modelo = d.Modelo,
+            ImeiSerie = d.ImeiSerie,
+            Accesorios = d.Accesorios,
+            EstadoFisico = d.EstadoFisico,
+            FallaReportada = d.FallaReportada,
+            Observaciones = d.Observaciones
+        };
+
+        db.Add(x);
+        await db.SaveChangesAsync();
+        return Ok(x);
+    }
+}
