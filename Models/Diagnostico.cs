@@ -7,6 +7,7 @@ public class Diagnostico {
   public string Telefono { get; set; } = string.Empty;
   public string Marca { get; set; } = string.Empty;
   public string Modelo { get; set; } = string.Empty;
+   public string TipoEquipo { get; set; } = string.Empty;
   public string? ImeiSerie { get; set; }
   public string DiagnosticoTecnico { get; set; } = string.Empty;
   public string Recomendacion { get; set; } = string.Empty;
