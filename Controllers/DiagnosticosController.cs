@@ -65,7 +65,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       Telefono = ingreso.Telefono.Trim(),
       Marca = ingreso.Marca.Trim(),
       Modelo = ingreso.Modelo.Trim(),
-      TipoEquipo = ingreso.TipoEquipo.Trim(),
       ImeiSerie = ingreso.ImeiSerie.Trim(),
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
