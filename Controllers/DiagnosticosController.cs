@@ -20,7 +20,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     .OrderByDescending(x => x.Id)
     .Select(x => new
     {
-      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,x.IngresoEquipo.TipoEquipo,
+      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,TipoEquipo = x.IngresoEquipo.TipoEquipo,
       x.Modelo, x.ImeiSerie, x.DiagnosticoTecnico, x.Recomendacion, x.CreadoEnUtc
     })
     .ToListAsync());
@@ -68,7 +68,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       Modelo = ingreso.Modelo.Trim(),
       IngresoEquipoId = ingreso.Id,
       IngresoEquipo = ingreso,
-      TipoEquipo = ingreso.TipoEquipo.Trim(),
       ImeiSerie = ingreso.ImeiSerie.Trim(),
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
