@@ -16,10 +16,11 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
   [HttpGet]
   public async Task<ActionResult> Listar() => Ok(await db.Diagnosticos
     .AsNoTracking()
+    .Include(x => x.IngresoEquipo)
     .OrderByDescending(x => x.Id)
     .Select(x => new
     {
-      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,
+      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,x.IngresoEquipo.TipoEquipo,
       x.Modelo, x.ImeiSerie, x.DiagnosticoTecnico, x.Recomendacion, x.CreadoEnUtc
     })
     .ToListAsync());
@@ -65,6 +66,8 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       Telefono = ingreso.Telefono.Trim(),
       Marca = ingreso.Marca.Trim(),
       Modelo = ingreso.Modelo.Trim(),
+      IngresoEquipoId = ingreso.Id,
+      IngresoEquipo = ingreso,
       TipoEquipo = ingreso.TipoEquipo.Trim(),
       ImeiSerie = ingreso.ImeiSerie.Trim(),
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
@@ -85,10 +88,29 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
   [HttpGet("{id:long}/pdf")]
   public async Task<IActionResult> DescargarPdf(long id)
-  {
-    var d = await db.Diagnosticos.FindAsync(id);
-    return d is null
-      ? NotFound()
-      : File(pdf.Generar(d), "application/pdf", $"{d.NumeroInforme}.pdf");
-  }
+    {
+        var diagnostico = await db.Diagnosticos
+            .AsNoTracking()
+            .Include(x => x.IngresoEquipo)
+            .FirstOrDefaultAsync(x => x.Id == id);
+
+        if (diagnostico is null)
+        {
+            return NotFound(new
+            {
+                message = "No se encontró el diagnóstico."
+            });
+        }
+
+        // Gracias al Include puedes utilizar:
+        var tipoEquipo = diagnostico.IngresoEquipo.TipoEquipo;
+
+        var archivo = pdf.Generar(diagnostico);
+
+        return File(
+            archivo,
+            "application/pdf",
+            $"{diagnostico.NumeroInforme}.pdf"
+        );
+    }
 }
