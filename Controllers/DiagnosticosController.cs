@@ -56,6 +56,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     }
 
     // Los datos del equipo se toman del ingreso registrado, no del navegador.
+    var tipoEquipo=ingreso.TipoEquipo;
     var diagnostico = new Diagnostico
     {
       NumeroInforme = dto.NumeroInforme.Trim(),
@@ -78,7 +79,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
     await db.SaveChangesAsync();
 
-    return File(pdf.Generar(diagnostico,"variable"), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
+    return File(pdf.Generar(diagnostico,tipoEquipo), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
    [HttpGet("{id:long}/pdf")]
