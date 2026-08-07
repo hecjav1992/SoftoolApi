@@ -81,30 +81,13 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     return File(pdf.Generar(diagnostico,"varibale"), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
-  [HttpGet("{id:long}/pdf")]
+   [HttpGet("{id:long}/pdf")]
   public async Task<IActionResult> DescargarPdf(long id)
-    {
-        var diagnostico = await db.Diagnosticos
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == id);
+  {
+    var d = await db.Diagnosticos.FindAsync(id);
+    return d is null
+      ? NotFound()
+      : File(pdf.Generar(d,"hola"), "application/pdf", $"{d.NumeroInforme}.pdf");
+  }
 
-        if (diagnostico is null)
-        {
-            return NotFound(new
-            {
-                message = "No se encontró el diagnóstico."
-            });
-        }
-
-        // Gracias al Include puedes utilizar:
-        var tipoEquipo = diagnostico.IngresoEquipo.TipoEquipo;
-
-        var archivo = pdf.Generar(diagnostico);
-
-        return File(
-            archivo,
-            "application/pdf",
-            $"{diagnostico.NumeroInforme}.pdf"
-        );
-    }
 }
