@@ -16,7 +16,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
   [HttpGet]
   public async Task<ActionResult> Listar() => Ok(await db.Diagnosticos
     .AsNoTracking()
-    .Include(x => x.IngresoEquipo)
     .OrderByDescending(x => x.Id)
     .Select(x => new
     {
@@ -65,8 +64,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       Telefono = ingreso.Telefono.Trim(),
       Marca = ingreso.Marca.Trim(),
       Modelo = ingreso.Modelo.Trim(),
-      IngresoEquipoId = ingreso.Id,
-      IngresoEquipo = ingreso,
       ImeiSerie = ingreso.ImeiSerie.Trim(),
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
@@ -89,7 +86,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     {
         var diagnostico = await db.Diagnosticos
             .AsNoTracking()
-            .Include(x => x.IngresoEquipo)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (diagnostico is null)
