@@ -31,7 +31,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
   {
     var numeroIngreso = dto.NumeroIngreso.Trim();
     var ingreso = await db.IngresosEquipos
-      .AsNoTracking()
       .FirstOrDefaultAsync(x => x.NumeroIngreso == numeroIngreso);
 
     if (ingreso is null)
@@ -82,7 +81,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
     await db.SaveChangesAsync();
 
-    return File(pdf.Generar(diagnostico), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
+    return File(pdf.Generar(diagnostico,"hola"), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
   [HttpGet("{id:long}/pdf")]

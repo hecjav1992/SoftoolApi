@@ -4,7 +4,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 namespace EasyData.Api.Services;
 public class PdfService {
-  public byte[] Generar(Diagnostico d) => Document.Create(container => {
+  public byte[] Generar(Diagnostico d,string tipoEquipo) => Document.Create(container => {
     container.Page(page => {
       page.Size(PageSizes.Letter); page.Margin(35); page.DefaultTextStyle(x => x.FontSize(10));
       page.Header().Column(c => {
@@ -16,7 +16,7 @@ public class PdfService {
       });
       page.Content().PaddingVertical(20).Column(c => {
         c.Spacing(14);
-        c.Item().Text($"DIAGNÓSTICO DE {d.IngresoEquipo?.TipoEquipo?.ToUpper()??""}").FontColor("#0783A0").Bold();
+        c.Item().Text($"DIAGNÓSTICO DE {tipoEquipo.ToUpper()}").FontColor("#0783A0").Bold();
         c.Item().Text($"{d.Marca} {d.Modelo}").FontSize(22).Bold().FontColor("#102A43");
         c.Item().Table(t => { t.ColumnsDefinition(cols => { cols.RelativeColumn(); cols.RelativeColumn(); cols.RelativeColumn(); cols.RelativeColumn(); });
           Celda(t,"CLIENTE",d.Cliente); Celda(t,"TELÉFONO",d.Telefono); Celda(t,"FECHA",d.Fecha.ToString("dd/MM/yyyy")); Celda(t,"IMEI / SERIE",d.ImeiSerie ?? "—"); });
