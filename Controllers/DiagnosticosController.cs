@@ -20,7 +20,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     .OrderByDescending(x => x.Id)
     .Select(x => new
     {
-      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,TipoEquipo = x.IngresoEquipo.TipoEquipo,
+      x.Id, x.NumeroInforme, x.Fecha, x.Cliente, x.Telefono, x.Marca,
       x.Modelo, x.ImeiSerie, x.DiagnosticoTecnico, x.Recomendacion, x.CreadoEnUtc
     })
     .ToListAsync());
@@ -81,7 +81,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
     await db.SaveChangesAsync();
 
-    return File(pdf.Generar(diagnostico,"hola"), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
+    return File(pdf.Generar(diagnostico,"varibale"), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
   [HttpGet("{id:long}/pdf")]
