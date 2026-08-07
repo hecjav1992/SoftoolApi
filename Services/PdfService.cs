@@ -4,7 +4,7 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 namespace EasyData.Api.Services;
 public class PdfService {
-  public byte[] Generar(Diagnostico d,string tipoEquipo) => Document.Create(container => {
+  public byte[] Generar(Diagnostico d) => Document.Create(container => {
     container.Page(page => {
       page.Size(PageSizes.Letter); page.Margin(35); page.DefaultTextStyle(x => x.FontSize(10));
       page.Header().Column(c => {
