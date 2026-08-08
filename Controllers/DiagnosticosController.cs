@@ -59,6 +59,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     var tipoEquipo=ingreso.TipoEquipo;
     var diagnostico = new Diagnostico
     {
+     
       NumeroInforme = dto.NumeroInforme.Trim(),
       Fecha = dto.Fecha,
       Cliente = ingreso.Cliente.Trim(),
@@ -69,7 +70,9 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
       Evidencia = bytes,
-      EvidenciaTipoContenido = tipo
+      EvidenciaTipoContenido = tipo,
+      IngresoEquipoId = ingreso.Id,
+      IngresoEquipo = ingreso
     };
 
     db.Diagnosticos.Add(diagnostico);
