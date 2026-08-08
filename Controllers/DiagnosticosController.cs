@@ -70,9 +70,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
       Evidencia = bytes,
-      EvidenciaTipoContenido = tipo,
-      IngresoEquipoId = ingreso.Id,
-      IngresoEquipo = ingreso
+      EvidenciaTipoContenido = tipo
     };
 
     db.Diagnosticos.Add(diagnostico);
