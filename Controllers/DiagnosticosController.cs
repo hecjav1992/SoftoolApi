@@ -56,7 +56,6 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     }
 
     // Los datos del equipo se toman del ingreso registrado, no del navegador.
-    var tipoEquipo=ingreso.TipoEquipo;
     var diagnostico = new Diagnostico
     {
      
@@ -82,7 +81,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
     await db.SaveChangesAsync();
 
-    return File(pdf.Generar(diagnostico,ingresoActual.TipoEquipo), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
+    return File(pdf.Generar(diagnostico), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
    [HttpGet("{id:long}/pdf")]
@@ -91,7 +90,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
     var d = await db.Diagnosticos.FindAsync(id);
     return d is null
       ? NotFound()
-      : File(pdf.Generar(d,"variable1"), "application/pdf", $"{d.NumeroInforme}.pdf");
+      : File(pdf.Generar(d), "application/pdf", $"{d.NumeroInforme}.pdf");
   }
 
 }
