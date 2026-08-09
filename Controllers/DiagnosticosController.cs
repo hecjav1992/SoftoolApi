@@ -70,7 +70,9 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       DiagnosticoTecnico = dto.DiagnosticoTecnico.Trim(),
       Recomendacion = dto.Recomendacion.Trim(),
       Evidencia = bytes,
-      EvidenciaTipoContenido = tipo
+      EvidenciaTipoContenido = tipo,
+      IngresoEquipoId = ingreso.Id,
+      IngresoEquipo = ingreso
     };
 
     db.Diagnosticos.Add(diagnostico);
@@ -80,7 +82,7 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
 
     await db.SaveChangesAsync();
 
-    return File(pdf.Generar(diagnostico,ingresoActual.TipoEquipo), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
+    return File(pdf.Generar(diagnostico,diagnostico.IngresoEquipo.TipoEquipo), "application/pdf", $"{diagnostico.NumeroInforme}.pdf");
   }
 
    [HttpGet("{id:long}/pdf")]

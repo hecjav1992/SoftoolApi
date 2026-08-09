@@ -12,5 +12,7 @@ public class Diagnostico {
   public string Recomendacion { get; set; } = string.Empty;
   public byte[]? Evidencia { get; set; }
   public string? EvidenciaTipoContenido { get; set; }
+  public long IngresoEquipoId { get; set; }
+  public IngresoEquipo? IngresoEquipo { get; set; }
   public DateTime CreadoEnUtc { get; set; } = DateTime.UtcNow;
 }
