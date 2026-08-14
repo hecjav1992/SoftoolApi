@@ -30,6 +30,9 @@ public class IngresoPdfService
 
                         x.Item().Text("TECNOLOGÍA Y SERVICIO TÉCNICO")
                             .FontSize(8);
+
+                        x.Item().Text("easydata10@gmail.com | +507 6884-4342")
+                            .FontSize(8);
                     });
 
                     r.ConstantItem(200).AlignRight().Column(x =>
