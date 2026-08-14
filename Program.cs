@@ -26,6 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 builder.Services.AddScoped<PdfService>();
+builder.Services.AddScoped<IngresoPdfService>();
 builder.Services.AddScoped<TokenService>();
 
 builder.Services
