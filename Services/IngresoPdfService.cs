@@ -31,6 +31,12 @@ public class IngresoPdfService
 
                     r.ConstantItem(200).AlignRight().Column(x =>
                     {
+                      x.Item()
+                      .Width(200)
+                      .Height(50)
+                      .AlignCenter()
+                      .Image("wwwroot/images/logo.png")
+                      .FitArea();
                          x.Item().Text("EASY DATA")
                             .Bold()
                             .FontSize(20)
