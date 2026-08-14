@@ -4,9 +4,11 @@ namespace EasyData.Api.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options):DbContext(options){
     public DbSet<Diagnostico> Diagnosticos=>Set<Diagnostico>();
     public DbSet<Usuario> Usuarios=>Set<Usuario>();
+    public DbSet<Marca> Marcas => Set<Marca>();
     public DbSet<IngresoEquipo> IngresosEquipos=>Set<IngresoEquipo>();
     protected override void OnModelCreating(ModelBuilder b){
         b.Entity<Diagnostico>().HasIndex(x=>x.NumeroInforme).IsUnique();
         b.Entity<Usuario>().HasIndex(x=>x.NombreUsuario).IsUnique();
         b.Entity<IngresoEquipo>().HasIndex(x=>x.NumeroIngreso).IsUnique();
+        
         }}
