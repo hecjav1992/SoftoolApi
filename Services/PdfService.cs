@@ -10,7 +10,8 @@ public class PdfService {
       page.Header().Column(c => {
         c.Item().Height(7).Background("#18A7C9");
         c.Item().PaddingTop(15).Row(r => {
-          r.RelativeItem().Column(x => { x.Item().Text("EASY DATA").Bold().FontSize(20).FontColor("#102A43"); x.Item().Text("TECNOLOGÍA Y SERVICIO TÉCNICO").FontSize(8); });
+          r.RelativeItem().Column(x => { x.Item().Text("EASY DATA").Bold().FontSize(20).FontColor("#102A43"); x.Item().Text("TECNOLOGÍA Y SERVICIO TÉCNICO").FontSize(8);  x.Item().Text("easydata10@gmail.com | +507 6884-4342")
+                            .FontSize(8); });
           r.ConstantItem(180).AlignRight().Column(x => { x.Item().Text("INFORME TÉCNICO").Bold(); x.Item().Text(d.NumeroInforme); });
         });
       });
