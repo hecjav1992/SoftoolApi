@@ -38,8 +38,9 @@ public class IngresoPdfService
                     r.ConstantItem(200).AlignRight().Column(x =>
                     {
                       x.Item()
-                      .Width(200)
+                      .Width(100)
                       .Height(50)
+                      .Padding(0)
                       .AlignCenter()
                       .Image(logoPath)
                       .FitArea();
