@@ -12,7 +12,7 @@ public class IngresoPdfService
           var logoPath = Path.Combine(
             Directory.GetCurrentDirectory(),
             "wwwroot",
-            "images",
+            "Images",
             "logo.png"
         );
         container.Page(page =>
