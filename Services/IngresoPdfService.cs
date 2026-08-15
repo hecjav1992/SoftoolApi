@@ -41,7 +41,7 @@ public class IngresoPdfService
                       .Width(200)
                       .Height(50)
                       .AlignCenter()
-                      .Image("wwwroot/Images/logo.png")
+                      .Image(logoPath)
                       .FitArea();
 
                          x.Item().Text("EASY DATA")
