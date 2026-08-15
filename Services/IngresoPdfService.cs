@@ -9,6 +9,12 @@ public class IngresoPdfService
 {
     public byte[] Generar(IngresoEquipo ingreso) => Document.Create(container =>
     {
+          var logoPath = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            "images",
+            "logo.png"
+        );
         container.Page(page =>
         {
             page.Size(PageSizes.Letter);
@@ -37,6 +43,7 @@ public class IngresoPdfService
                       .AlignCenter()
                       .Image("wwwroot/Images/logo.png")
                       .FitArea();
+
                          x.Item().Text("EASY DATA")
                             .Bold()
                             .FontSize(20)
