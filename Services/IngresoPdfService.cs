@@ -29,15 +29,7 @@ public class IngresoPdfService
                 {
                     r.RelativeItem().Column(x =>
                     {
-                        x.Item().Text("COMPROBANTE DE INGRESO").Bold();
-                        x.Item().Text(ingreso.NumeroIngreso)
-                            .FontColor("#0783A0")
-                            .Bold();
-                    });
-
-                    r.ConstantItem(200).AlignRight().Column(x =>
-                    {
-                         x.Item().Text("EASY DATA")
+                        x.Item().Text("EASY DATA")
                             .Bold()
                             .FontSize(20)
                             .FontColor("#102A43");
@@ -48,6 +40,16 @@ public class IngresoPdfService
                         x.Item().Text("easydata10@gmail.com | +507 6884-4342")
                             .FontSize(8);
                    
+                       
+                    });
+
+                    r.ConstantItem(200).AlignRight().Column(x =>
+                    {
+                         x.Item().Text("COMPROBANTE DE INGRESO").Bold();
+                        x.Item().Text(ingreso.NumeroIngreso)
+                            .FontColor("#0783A0")
+                            .Bold();
+                         
                     });
                 });
             });
