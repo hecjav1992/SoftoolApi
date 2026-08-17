@@ -12,4 +12,7 @@ public class CrearIngresoDto{
     public string Accesorios{get;set;}="";
     public string EstadoFisico{get;set;}="";
     public string FallaReportada{get;set;}="";
-    public string? Observaciones{get;set;}}
+    public string? Observaciones{get;set;}
+    public string Cedula { get; set; } = string.Empty;
+    public IFormFile? Evidencia { get; set; }
+    }

@@ -9,4 +9,5 @@ public class CrearDiagnosticoDto
   [Required] public string DiagnosticoTecnico { get; set; } = string.Empty;
   [Required] public string Recomendacion { get; set; } = string.Empty;
   public IFormFile? Evidencia { get; set; }
+  public string Cedula { get; set; } = string.Empty;
 }

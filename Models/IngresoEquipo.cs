@@ -15,4 +15,8 @@ public class IngresoEquipo{
     public string FallaReportada{get;set;}=""; 
     public string? Observaciones{get;set;} 
     public string Estado{get;set;}="Recibido"; 
-    public DateTime CreadoEn{get;set;}=DateTime.UtcNow;}
+    public DateTime CreadoEn{get;set;}=DateTime.UtcNow;
+    public string Cedula { get; set; } = string.Empty;
+    public byte[]? Evidencia { get; set; }
+    public string? EvidenciaTipoContenido { get; set; }
+    }
