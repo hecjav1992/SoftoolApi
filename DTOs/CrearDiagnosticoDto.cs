@@ -11,5 +11,6 @@ public class CrearDiagnosticoDto
   public IFormFile? Evidencia { get; set; }
   public string Cedula { get; set; } = string.Empty;
   public decimal? PrecioReparacion { get; set; }
-  public DateTime? FechaVigenciaGarantia { get; set; }
+
+  public DateOnly? FechaVigenciaGarantia { get; set; }
 }

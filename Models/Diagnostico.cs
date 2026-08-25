@@ -16,6 +16,6 @@ public class Diagnostico {
   public IngresoEquipo? IngresoEquipo { get; set; }
   public DateTime CreadoEnUtc { get; set; } = DateTime.UtcNow;
   public decimal? PrecioReparacion { get; set; }
-  public DateTime? FechaVigenciaGarantia { get; set; }
+  public DateOnly? FechaVigenciaGarantia { get; set; }
 
 }
