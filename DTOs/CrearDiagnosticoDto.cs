@@ -10,4 +10,6 @@ public class CrearDiagnosticoDto
   [Required] public string Recomendacion { get; set; } = string.Empty;
   public IFormFile? Evidencia { get; set; }
   public string Cedula { get; set; } = string.Empty;
+  public decimal? PrecioReparacion { get; set; }
+  public DateTime? FechaVigenciaGarantia { get; set; }
 }

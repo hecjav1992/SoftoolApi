@@ -71,7 +71,9 @@ public class DiagnosticosController(AppDbContext db, PdfService pdf) : Controlle
       Evidencia = bytes,
       EvidenciaTipoContenido = tipo,
       IngresoEquipoId = ingreso.Id,
-      IngresoEquipo = ingreso
+      IngresoEquipo = ingreso,
+      PrecioReparacion = dto.PrecioReparacion,
+      FechaVigenciaGarantia = dto.FechaVigenciaGarantia,
     };
 
     db.Diagnosticos.Add(diagnostico);

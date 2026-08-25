@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EasyData.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f229e40cdc9a4799a48b2392ebda750a11126df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8eefc6b6b260552e35789ff37f2fadde7e77f3de")]
 [assembly: System.Reflection.AssemblyProductAttribute("EasyData.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EasyData.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
