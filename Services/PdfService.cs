@@ -25,6 +25,42 @@ public class PdfService {
         Seccion(c,"02","Recomendación",d.Recomendacion);
         c.Item().Text("03  Evidencia fotográfica").Bold().FontColor("#102A43");
         if (d.Evidencia is { Length: > 0 }) c.Item().AlignCenter().MaxHeight(260).Image(d.Evidencia).FitArea(); else c.Item().Text("No se adjuntó evidencia fotográfica.").Italic();
+      c.Item()
+    .PaddingTop(30)
+    .Row(row =>
+    {
+        row.RelativeItem()
+            .Column(x =>
+            {
+                x.Item()
+                    .LineHorizontal(1)
+                    .LineColor("#64748B");
+
+                x.Item()
+                    .AlignCenter()
+                    .PaddingTop(5)
+                    .Text("Firma del responsable")
+                    .FontSize(8)
+                    .FontColor("#64748B");
+            });
+
+        row.ConstantItem(55);
+
+        row.RelativeItem()
+            .Column(x =>
+            {
+                x.Item()
+                    .LineHorizontal(1)
+                    .LineColor("#64748B");
+
+                x.Item()
+                    .AlignCenter()
+                    .PaddingTop(5)
+                    .Text("Firma del cliente")
+                    .FontSize(8)
+                    .FontColor("#64748B");
+            });
+    });
       });
       page.Footer().AlignCenter().Text(x => { x.Span("Mgtr. Héctor J. Degracia · EASY DATA · Capira, Panamá Oeste · Página "); x.CurrentPageNumber(); });
     });
